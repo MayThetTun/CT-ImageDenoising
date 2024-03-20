@@ -1,0 +1,42 @@
+% A PyTorch implementation of FFDNet image Denoising (Medical image Poisson-Gaussian Noise)
+====================================================
+## Dependencies
+* [PyTorch v0.3.1](http://pytorch.org/)
+* [scikit-image](http://scikit-image.org/)
+* [torchvision](https://github.com/pytorch/vision)
+* [OpenCV](https://pypi.org/project/opencv-python/)
+* [HDF5](http://www.h5py.org/)
+* [tensorboardX](https://github.com/lanpa/tensorboard-pytorch)
+
+## Medical image denoising
+======================================
+(1) Create prepare patches
+
+python prepare_patches.py --aug_times 1 --gray;
+
+The default size of the stride is set to 20, while augmentation time can be chosen (with the default being 1).
+Users have the flexibility to specify patch size, FFDNet recommends grayscale for 70.
+A model can be trained after having built the training and validation databases.
+(i.e. train_gray.h5* and val_gray.h5* for grayscale denoising).
+
+(2) Model Training
+=================
+For Grayscale image,
+
+python OrgTrain.py --epochs 50 --gray;
+
+* By default, models are trained for values of gaussian noise in [0, 75], poisson noise [0, 20] and
+* validation gaussian noise 25 and poisson noise is set to 10.
+* We're able to modify the training and validation ranges. The training range for AWGN,
+specified as [0, 75] following FFDNet, and others are designated as moderate noise levels as per relevant papers.
+
+(3) Model Testing
+==============
+For Grayscale image,
+
+python OrgTest.py --no_of_channel 1 --gnoise_sigma 25 --pnoise_sigma 10 --add_noise = true;
+
+* Change the noise level according to the gaussian noise level  [ gnoise_sigma ] parameter and
+* poisson noise level [ pnoise_sigma ] parameter.
+
+** Modify the training and testing file names for DLPF, BLPF, GLPF, and SLPF to different requirements.
