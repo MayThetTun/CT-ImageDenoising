@@ -1,3 +1,6 @@
+Journal of Signal Processing (March 2024)
+Poisson–Gaussian Noise Removal for Low-Dose CT Images by Integrating Noisy Image Patch and Impulse Response of Low-Pass Filter in CNN
+May Thet Tun, Yosuke Sugiura, Tetsuya Shimamura
 % A PyTorch implementation of FFDNet image Denoising (Medical image Poisson-Gaussian Noise)
 ====================================================
 ## Dependencies
